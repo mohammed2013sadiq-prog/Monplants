@@ -1,0 +1,7 @@
+.git
+.gitignore
+node_modules
+mobile/node_modules
+backend/node_modules
+.expo
+npm-debug.log
