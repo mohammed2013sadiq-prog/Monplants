@@ -41,7 +41,7 @@ const getJournal = async (req, res, next) => {
       data: journalEntries
     });
   } catch (error) {
-    // Fallback
+
     res.status(200).json({
       success: true,
       count: DEFAULT_JOURNALS.length,

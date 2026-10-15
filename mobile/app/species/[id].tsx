@@ -43,7 +43,6 @@ export default function SpeciesDetailScreen() {
     let isMounted = true;
 
     const fetchDetail = async () => {
-      // Look in local store first
       const local = speciesList.find((s) => s.id === numId);
       if (local && isMounted) {
         setSpecies(local);
@@ -55,7 +54,6 @@ export default function SpeciesDetailScreen() {
           setSpecies(remote);
         }
       } catch (e) {
-        // use local/catalog
       }
     };
 
@@ -73,7 +71,6 @@ export default function SpeciesDetailScreen() {
     currentSpecies.toxicity_level.toLowerCase().includes('non') ||
     currentSpecies.toxicity_level.toLowerCase().includes('safe');
 
-  // Dynamic tags
   const getTags = () => {
     const tags = [];
     if (currentSpecies.care_difficulty) {
@@ -119,7 +116,6 @@ export default function SpeciesDetailScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Top Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Ionicons name="arrow-back" size={22} color={Colors.textPrimary} />
@@ -141,15 +137,12 @@ export default function SpeciesDetailScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {/* Botanical Image Showcase Card */}
         <View style={styles.imageCard}>
           <Image
             source={resolvePlantImage(currentSpecies.image_url || currentSpecies.common_name || currentSpecies.scientific_name)}
             style={styles.plantImage}
             resizeMode="cover"
           />
-
-          {/* Pet Toxicity Alert / Safe Badge */}
           <View
             style={[
               styles.toxicityBadge,
@@ -171,8 +164,6 @@ export default function SpeciesDetailScreen() {
             </Text>
           </View>
         </View>
-
-        {/* Plant Titles & Quick Tags */}
         <View style={styles.titleSection}>
           <Text style={styles.commonName}>{currentSpecies.common_name}</Text>
           <Text style={styles.scientificName}>{currentSpecies.scientific_name}</Text>
@@ -202,10 +193,7 @@ export default function SpeciesDetailScreen() {
             ))}
           </View>
         </View>
-
-        {/* 4 Care Essentials Grid */}
         <View style={styles.careGrid}>
-          {/* Light */}
           <View style={styles.careBox}>
             <View style={styles.iconCircle}>
               <Ionicons name="sunny-outline" size={20} color={Colors.primary} />
@@ -213,8 +201,6 @@ export default function SpeciesDetailScreen() {
             <Text style={styles.careBoxTitle}>Lumière / Light</Text>
             <Text style={styles.careBoxDesc}>{currentSpecies.light_needs}</Text>
           </View>
-
-          {/* Water */}
           <View style={styles.careBox}>
             <View style={styles.iconCircle}>
               <Ionicons name="water-outline" size={20} color={Colors.primary} />
@@ -222,8 +208,6 @@ export default function SpeciesDetailScreen() {
             <Text style={styles.careBoxTitle}>Arrosage / Water</Text>
             <Text style={styles.careBoxDesc}>{currentSpecies.watering_frequency}</Text>
           </View>
-
-          {/* Soil */}
           <View style={styles.careBox}>
             <View style={styles.iconCircle}>
               <Ionicons name="earth-outline" size={20} color={Colors.primary} />
@@ -231,8 +215,6 @@ export default function SpeciesDetailScreen() {
             <Text style={styles.careBoxTitle}>Sol / Soil</Text>
             <Text style={styles.careBoxDesc}>{currentSpecies.soil_type}</Text>
           </View>
-
-          {/* Climate */}
           <View style={styles.careBox}>
             <View style={styles.iconCircle}>
               <Ionicons name="thermometer-outline" size={20} color={Colors.primary} />
@@ -241,15 +223,11 @@ export default function SpeciesDetailScreen() {
             <Text style={styles.careBoxDesc}>{currentSpecies.climate_adaptation}</Text>
           </View>
         </View>
-
-        {/* About this Plant Section */}
         <View style={styles.aboutCard}>
           <Text style={styles.aboutTitle}>À propos / About this Plant</Text>
           <Text style={styles.aboutText}>{currentSpecies.description}</Text>
         </View>
       </ScrollView>
-
-      {/* Sticky Bottom Action */}
       <View style={styles.bottomBar}>
         <Button
           title="+ Add to My Plants"

@@ -7,30 +7,25 @@ const Favorite = require('./Favorite');
 const Reminder = require('./Reminder');
 const Journal = require('./Journal');
 
-// --- Relationships ---
 
-// User Relationships
 User.hasMany(UserPlant, { foreignKey: 'user_id', as: 'plants', onDelete: 'CASCADE' });
 UserPlant.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
 User.hasMany(Favorite, { foreignKey: 'user_id', as: 'favorites', onDelete: 'CASCADE' });
 Favorite.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
-// Species Relationships
 Species.hasMany(UserPlant, { foreignKey: 'species_id', as: 'userPlants', onDelete: 'CASCADE' });
 UserPlant.belongsTo(Species, { foreignKey: 'species_id', as: 'species' });
 
 Species.hasMany(Favorite, { foreignKey: 'species_id', as: 'favoritedBy', onDelete: 'CASCADE' });
 Favorite.belongsTo(Species, { foreignKey: 'species_id', as: 'species' });
 
-// UserPlant Relationships
 UserPlant.hasMany(Reminder, { foreignKey: 'user_plant_id', as: 'reminders', onDelete: 'CASCADE' });
 Reminder.belongsTo(UserPlant, { foreignKey: 'user_plant_id', as: 'plant' });
 
 UserPlant.hasMany(Journal, { foreignKey: 'user_plant_id', as: 'journalEntries', onDelete: 'CASCADE' });
 Journal.belongsTo(UserPlant, { foreignKey: 'user_plant_id', as: 'plant' });
 
-// Initial Seed Function for Mediterranean / Moroccan Flora
 const seedInitialData = async () => {
   try {
     const count = await Species.count();
@@ -124,7 +119,7 @@ const seedInitialData = async () => {
       ]);
       console.log('Seeded initial plant species successfully.');
     }
-    // Seed Default Demo User if none exists
+
     const userCount = await User.count();
     if (userCount === 0) {
       console.log('Seeding demo botanical explorer user...');

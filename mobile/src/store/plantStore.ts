@@ -15,7 +15,6 @@ interface PlantState {
   isLoading: boolean;
   error: string | null;
 
-  // Actions
   fetchSpecies: (search?: string) => Promise<void>;
   getSpeciesDetails: (id: number) => Promise<Species | null>;
   fetchMyPlants: () => Promise<void>;
@@ -78,7 +77,6 @@ export const usePlantStore = create<PlantState>((set, get) => ({
         return species;
       }
     } catch (err: any) {
-      // Fallback
     }
     const fallback = findSpeciesById(id);
     set({ selectedSpecies: fallback });
@@ -220,7 +218,6 @@ export const usePlantStore = create<PlantState>((set, get) => ({
       set({ lastIdentification: data, isLoading: false });
       return data;
     } catch (err: any) {
-      // Intelligent botanical classifier fallback
       const lower = String(imageUriOrBase64 || '').toLowerCase();
 
       let species = {

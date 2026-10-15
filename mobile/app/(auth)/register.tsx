@@ -139,13 +139,6 @@ export default function RegisterScreen() {
           <Text style={styles.title}>Join MoPlants</Text>
           <Text style={styles.subtitle}>Create your botanical database account.</Text>
 
-          {/* Database Connection Badge */}
-          <View style={styles.dbBadge}>
-            <View style={styles.dbDot} />
-            <Text style={styles.dbText}>PostgreSQL Database Connected</Text>
-          </View>
-
-          {/* Error Banner */}
           {error ? (
             <View style={styles.errorContainer}>
               <Ionicons name="alert-circle" size={18} color="#DC2626" />
@@ -153,7 +146,7 @@ export default function RegisterScreen() {
             </View>
           ) : null}
 
-          {/* Avatar Selector */}
+
           <Text style={styles.avatarLabel}>Choose Your Avatar</Text>
           <View style={styles.avatarRow}>
             {AVATAR_PRESETS.map((item) => {
@@ -317,31 +310,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginBottom: 14
   },
-  dbBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    backgroundColor: '#ECFDF5',
-    borderColor: '#A7F3D0',
-    borderWidth: 1,
-    paddingVertical: 4,
-    paddingHorizontal: 12,
-    borderRadius: 16,
-    marginBottom: 14,
-    gap: 6
-  },
-  dbDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#10B981'
-  },
-  dbText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#047857'
-  },
+
   errorContainer: {
     flexDirection: 'row',
     alignItems: 'center',

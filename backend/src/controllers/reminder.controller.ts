@@ -49,7 +49,7 @@ const getReminders = async (req, res, next) => {
       data: reminders
     });
   } catch (error) {
-    // Graceful offline fallback
+
     res.status(200).json({
       success: true,
       count: DEFAULT_REMINDERS.length,
@@ -68,7 +68,7 @@ const createReminder = async (req, res, next) => {
       });
     }
 
-    // Verify plant belongs to user
+
     const plant = await UserPlant.findOne({
       where: { id: user_plant_id, user_id: req.user.id }
     });

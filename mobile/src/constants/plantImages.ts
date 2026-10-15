@@ -13,20 +13,15 @@ export const AVATAR_IMAGES = {
   ai_bot: require('../../assets/avatar/ai_avatar.jpg'),
 };
 
-/**
- * Resolves a plant name, species object, or URL to the best-fitting image source
- */
 export function resolvePlantImage(nameOrUrl?: string): ImageSourcePropType {
   if (!nameOrUrl) return PLANT_IMAGES.olivier;
 
   const str = String(nameOrUrl).toLowerCase();
 
-  // If user took a picture or picked from device
   if (str.startsWith('file://') || str.startsWith('content://') || str.startsWith('ph://')) {
     return { uri: nameOrUrl };
   }
 
-  // Intercept known species keywords
   if (str.includes('argan')) {
     return PLANT_IMAGES.arganier;
   }
@@ -43,7 +38,6 @@ export function resolvePlantImage(nameOrUrl?: string): ImageSourcePropType {
     return PLANT_IMAGES.hibiscus;
   }
 
-  // If it's a valid remote URL or data URI (non-burger)
   if (str.startsWith('http://') || str.startsWith('https://') || str.startsWith('data:')) {
     return { uri: nameOrUrl };
   }

@@ -12,7 +12,6 @@ export default function SettingsScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Ionicons name="arrow-back" size={22} color={Colors.textPrimary} />
@@ -22,7 +21,6 @@ export default function SettingsScreen() {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        {/* Care & Reminders */}
         <Text style={styles.sectionHeader}>Plant Care</Text>
         <View style={styles.groupCard}>
           <View style={styles.settingRow}>
@@ -53,8 +51,6 @@ export default function SettingsScreen() {
             />
           </View>
         </View>
-
-        {/* Units */}
         <Text style={styles.sectionHeader}>Preferences</Text>
         <View style={styles.groupCard}>
           <View style={styles.settingRow}>
@@ -70,8 +66,6 @@ export default function SettingsScreen() {
             />
           </View>
         </View>
-
-        {/* About */}
         <Text style={styles.sectionHeader}>About MoPlants</Text>
         <View style={styles.groupCard}>
           <TouchableOpacity style={styles.navRow}>

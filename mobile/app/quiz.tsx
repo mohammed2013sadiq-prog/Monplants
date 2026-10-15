@@ -11,7 +11,6 @@ interface Question {
   correctIndex: number;
   explanation: string;
 }
-
 const QUESTIONS: Question[] = [
   {
     question: 'Where is the Argan tree (Argania spinosa) naturally endemic?',
@@ -57,7 +56,6 @@ export default function QuizScreen() {
       setSelectedOpt(null);
       setShowResult(false);
     } else {
-      // Completed
       setCurrentIdx(QUESTIONS.length);
     }
   };
@@ -71,7 +69,6 @@ export default function QuizScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Ionicons name="arrow-back" size={22} color={Colors.textPrimary} />

@@ -112,10 +112,9 @@ const getAllSpecies = async (searchQuery) => {
 
     if (species && species.length > 0) return species;
   } catch (err) {
-    // Database connection fallback
+
   }
 
-  // Resilient fallback when DB is not yet populated
   if (searchQuery) {
     const q = searchQuery.toLowerCase();
     return DEFAULT_SPECIES.filter(
@@ -133,12 +132,12 @@ const getSpeciesById = async (id) => {
     const species = await Species.findByPk(id);
     if (species) return species;
   } catch (err) {
-    // DB fallback
+
   }
 
   const found = DEFAULT_SPECIES.find((s) => s.id === parseInt(id, 10));
   if (!found) {
-    const error = new Error('Species not found.');
+    const error: any = new Error('Species not found.');
     error.statusCode = 404;
     throw error;
   }

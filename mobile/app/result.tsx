@@ -22,14 +22,13 @@ export default function ResultScreen() {
 
   const [isAdding, setIsAdding] = useState(false);
 
-  // Parse species data if passed
   let parsedData = null;
   try {
     if (params.speciesData && typeof params.speciesData === 'string') {
       parsedData = JSON.parse(params.speciesData);
     }
   } catch (e) {
-    // fallback
+
   }
 
   const rawSpecies = parsedData?.species;
@@ -73,7 +72,6 @@ export default function ResultScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Top Header */}
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => router.back()}
@@ -98,24 +96,29 @@ export default function ResultScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {/* Main Plant Photograph Card */}
         <View style={styles.imageCard}>
           <Image
             source={resolvePlantImage(imageUri || species.commonName || species.scientificName)}
             style={styles.mainImage}
             resizeMode="cover"
           />
-
-          {/* Confidence Badge */}
-          <View style={styles.matchBadge}>
-            <View style={styles.matchDot} />
-            <Text style={styles.matchText}>
-              {Math.round(confidence * 100)}% Match
-            </Text>
+          <View style={styles.badgeRow}>
+            {parsedData?.aiPowered && (
+              <View style={styles.aiBadge}>
+                <Ionicons name="sparkles" size={13} color="#14422D" />
+                <Text style={styles.aiBadgeText}>
+                  {parsedData?.provider ? `${parsedData.provider} AI` : (parsedData?.aiModel?.toLowerCase().includes('gemini') ? 'Gemini AI' : 'DeepSeek AI')}
+                </Text>
+              </View>
+            )}
+            <View style={styles.matchBadge}>
+              <View style={styles.matchDot} />
+              <Text style={styles.matchText}>
+                {Math.round(confidence * 100)}% Match
+              </Text>
+            </View>
           </View>
         </View>
-
-        {/* Species Information Card */}
         <View style={styles.infoCard}>
           <View style={styles.titleRow}>
             <View>
@@ -123,8 +126,6 @@ export default function ResultScreen() {
               <Text style={styles.scientificName}>{species.scientificName}</Text>
             </View>
           </View>
-
-          {/* Tag Chips */}
           <View style={styles.tagChipsRow}>
             <View style={[styles.chip, { backgroundColor: '#FEF3C7' }]}>
               <Text style={[styles.chipText, { color: '#92400E' }]}>Full Sun</Text>
@@ -138,8 +139,6 @@ export default function ResultScreen() {
           </View>
 
           <Text style={styles.descriptionText}>{species.description}</Text>
-
-          {/* Botanical Care Specs Grid */}
           <View style={styles.specsGrid}>
             <View style={styles.specBox}>
               <Ionicons name="sunny-outline" size={20} color={Colors.primary} />
@@ -178,8 +177,6 @@ export default function ResultScreen() {
             </View>
           </View>
         </View>
-
-        {/* Similar Species Section */}
         <View style={styles.similarSection}>
           <Text style={styles.similarTitle}>Similar Species</Text>
           <TouchableOpacity
@@ -200,8 +197,6 @@ export default function ResultScreen() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-      {/* Sticky Bottom Action */}
       <View style={styles.bottomBar}>
         <Button
           title="+ Add to My Plants"
@@ -260,10 +255,29 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%'
   },
-  matchBadge: {
+  badgeRow: {
     position: 'absolute',
     top: 16,
     right: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8
+  },
+  aiBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#BCEECF',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 20,
+    gap: 5
+  },
+  aiBadgeText: {
+    fontSize: 12,
+    fontWeight: '800',
+    color: '#14422D'
+  },
+  matchBadge: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.92)',

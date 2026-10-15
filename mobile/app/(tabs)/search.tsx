@@ -52,12 +52,9 @@ export default function SearchScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Explore Flora</Text>
+        <Text style={styles.headerTitle}>Explore MonPlants </Text>
         <Text style={styles.headerSub}>Search botanical species, care guides & remedies</Text>
-
-        {/* Search Bar */}
         <View style={styles.searchBar}>
           <Ionicons name="search" size={20} color={Colors.textMuted} />
           <TextInput
@@ -74,8 +71,6 @@ export default function SearchScreen() {
             </TouchableOpacity>
           )}
         </View>
-
-        {/* Category Pills */}
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -102,8 +97,6 @@ export default function SearchScreen() {
           })}
         </ScrollView>
       </View>
-
-      {/* Species List */}
       {isLoading ? (
         <Loading message="Discovering species..." />
       ) : (

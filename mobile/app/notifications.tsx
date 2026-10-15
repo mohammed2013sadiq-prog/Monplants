@@ -42,7 +42,6 @@ export default function NotificationsScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Ionicons name="arrow-back" size={22} color={Colors.textPrimary} />
@@ -131,7 +130,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F6FCF8'
   },
   iconCircle: {
-    width: 44,
     height: 44,
     borderRadius: 22,
     alignItems: 'center',
@@ -140,6 +138,7 @@ const styles = StyleSheet.create({
   },
   notifInfo: {
     flex: 1
+
   },
   notifTop: {
     flexDirection: 'row',

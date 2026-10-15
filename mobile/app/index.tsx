@@ -11,7 +11,6 @@ export default function SplashScreen() {
   const token = useAuthStore((state) => state.token);
 
   useEffect(() => {
-    // If user is already authenticated, take them directly to home
     if (token) {
       const timer = setTimeout(() => {
         router.replace('/(tabs)/home');
@@ -23,7 +22,6 @@ export default function SplashScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.backgroundCard}>
-        {/* Moroccan Botanical Motif / Header Accent */}
         <View style={styles.iconCircle}>
           <Ionicons name="leaf" size={48} color="#FFFFFF" />
         </View>
@@ -32,7 +30,7 @@ export default function SplashScreen() {
         <Text style={styles.subtitle}>Discover • Identify • Care</Text>
 
         <Text style={styles.description}>
-          Your intelligent botanical companion. Identify species, care for Moroccan & Mediterranean flora, and nurture your living sanctuary.
+          Your intelligent botanical companion. Identify species, care for Moroccan & Mediterranean MonPlants , and nurture your living sanctuary.
         </Text>
 
         <View style={styles.buttonGroup}>

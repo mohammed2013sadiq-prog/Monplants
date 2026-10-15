@@ -93,20 +93,20 @@ export default function JournalScreen() {
                 action === 'Watered'
                   ? 'water-outline'
                   : action === 'Fertilized'
-                  ? 'flask-outline'
-                  : 'cut-outline',
+                    ? 'flask-outline'
+                    : 'cut-outline',
               iconBg:
                 action === 'Watered'
                   ? '#CCFBF1'
                   : action === 'Fertilized'
-                  ? '#FEF3C7'
-                  : '#FFEDD5',
+                    ? '#FEF3C7'
+                    : '#FFEDD5',
               iconColor:
                 action === 'Watered'
                   ? '#0F766E'
                   : action === 'Fertilized'
-                  ? '#B45309'
-                  : '#C2410C'
+                    ? '#B45309'
+                    : '#C2410C'
             };
             setLogs([newEntry, ...logs]);
           }
@@ -117,14 +117,11 @@ export default function JournalScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <View>
           <Text style={styles.headerTitle}>Care Journal</Text>
           <Text style={styles.headerSub}>Timeline of watering, feeding, and pruning</Text>
         </View>
-
-        {/* Quick Log Action */}
         <TouchableOpacity
           style={styles.addLogBtn}
           onPress={() => handleQuickLog('Watered')}
@@ -133,8 +130,6 @@ export default function JournalScreen() {
           <Text style={styles.addLogBtnText}>Log Care</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Quick Action Chips */}
       <View style={styles.quickChipsRow}>
         <TouchableOpacity
           style={[styles.quickChip, { backgroundColor: '#E0F2FE' }]}
@@ -160,8 +155,6 @@ export default function JournalScreen() {
           <Text style={[styles.quickChipText, { color: '#C2410C' }]}>+ Prune</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Timeline List */}
       <FlatList
         data={logs}
         keyExtractor={(item) => item.id}

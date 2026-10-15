@@ -78,7 +78,6 @@ export default function ChatScreen() {
       };
       setMessages((prev) => [...prev, botMsg]);
     } catch (e) {
-      // Intelligent botanical engine fallback
       const lower = query.toLowerCase();
       let fallbackReply = "Pour maintenir la vitalité de vos plantes, assurez un bon drainage et adaptez l'arrosage selon la saison.";
       let newSuggestions = DEFAULT_SUGGESTIONS;
@@ -118,7 +117,6 @@ export default function ChatScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Ionicons name="arrow-back" size={22} color={Colors.textPrimary} />
@@ -132,8 +130,6 @@ export default function ChatScreen() {
           <Ionicons name="sparkles" size={20} color={Colors.primary} />
         </TouchableOpacity>
       </View>
-
-      {/* Messages List */}
       <FlatList
         data={messages}
         keyExtractor={(item) => item.id}
@@ -191,8 +187,6 @@ export default function ChatScreen() {
           </TouchableOpacity>
         ))}
       </View>
-
-      {/* Chat Input Bar */}
       <View style={styles.inputContainer}>
         <TouchableOpacity style={styles.attachBtn}>
           <Ionicons name="add-circle-outline" size={24} color={Colors.textMuted} />

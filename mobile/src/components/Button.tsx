@@ -36,14 +36,12 @@ export const Button: React.FC<ButtonProps> = ({
   const getContainerStyle = (): StyleProp<ViewStyle> => {
     const base: ViewStyle[] = [styles.container];
 
-    // Variant style
     if (variant === 'primary') base.push(styles.primary);
     else if (variant === 'secondary') base.push(styles.secondary);
     else if (variant === 'outline') base.push(styles.outline);
     else if (variant === 'earth') base.push(styles.earth);
     else if (variant === 'danger') base.push(styles.danger);
 
-    // Size style
     if (size === 'sm') base.push(styles.sm);
     else if (size === 'lg') base.push(styles.lg);
     else base.push(styles.md);

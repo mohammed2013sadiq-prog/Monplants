@@ -20,9 +20,14 @@ export default function ScannerScreen() {
   const { identifyPlantPhoto, isLoading } = usePlantStore();
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedBase64, setSelectedBase64] = useState<string | null>(null);
   const [flashMode, setFlashMode] = useState(false);
 
-  // Gallery Picker
+  const selectSpecimen = (key: string) => {
+    setSelectedImage(key);
+    setSelectedBase64(null);
+  };
+
   const pickFromGallery = async () => {
     try {
       const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -31,9 +36,9 @@ export default function ScannerScreen() {
           'Photo Library Access',
           'Choose a plant specimen to test botanical identification:',
           [
-            { text: '🌿 Arganier', onPress: () => setSelectedImage('arganier') },
-            { text: '🌴 Palmier Dattier', onPress: () => setSelectedImage('palmier_dattier') },
-            { text: '🫒 Olivier', onPress: () => setSelectedImage('olivier') },
+            { text: '🌿 Arganier', onPress: () => selectSpecimen('arganier') },
+            { text: '🌴 Palmier Dattier', onPress: () => selectSpecimen('palmier_dattier') },
+            { text: '🫒 Olivier', onPress: () => selectSpecimen('olivier') },
             { text: 'Cancel', style: 'cancel' }
           ]
         );
@@ -44,18 +49,24 @@ export default function ScannerScreen() {
         mediaTypes: ['images'],
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 0.8
+        quality: 0.8,
+        base64: true
       });
 
       if (!result.canceled && result.assets && result.assets.length > 0) {
-        setSelectedImage(result.assets[0].uri);
+        const asset = result.assets[0];
+        setSelectedImage(asset.uri);
+        if (asset.base64) {
+          setSelectedBase64(`data:image/jpeg;base64,${asset.base64}`);
+        } else {
+          setSelectedBase64(null);
+        }
       }
     } catch (e) {
-      setSelectedImage('olivier');
+      selectSpecimen('olivier');
     }
   };
 
-  // Camera Picker / Specimen Capture
   const takePhoto = async () => {
     try {
       const permission = await ImagePicker.requestCameraPermissionsAsync();
@@ -66,15 +77,15 @@ export default function ScannerScreen() {
           [
             {
               text: '🌿 Arganier (Argania spinosa)',
-              onPress: () => setSelectedImage('arganier')
+              onPress: () => selectSpecimen('arganier')
             },
             {
               text: '🌴 Palmier Dattier (Phoenix)',
-              onPress: () => setSelectedImage('palmier_dattier')
+              onPress: () => selectSpecimen('palmier_dattier')
             },
             {
               text: '🫒 Olivier (Olea europaea)',
-              onPress: () => setSelectedImage('olivier')
+              onPress: () => selectSpecimen('olivier')
             },
             {
               text: 'Photo Gallery',
@@ -89,26 +100,33 @@ export default function ScannerScreen() {
       const result = await ImagePicker.launchCameraAsync({
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 0.8
+        quality: 0.8,
+        base64: true
       });
 
       if (!result.canceled && result.assets && result.assets.length > 0) {
-        setSelectedImage(result.assets[0].uri);
+        const asset = result.assets[0];
+        setSelectedImage(asset.uri);
+        if (asset.base64) {
+          setSelectedBase64(`data:image/jpeg;base64,${asset.base64}`);
+        } else {
+          setSelectedBase64(null);
+        }
       }
     } catch (e) {
-      setSelectedImage('olivier');
+      selectSpecimen('olivier');
     }
   };
 
-  // Trigger Identification
   const handleIdentify = async () => {
-    const imageToAnalyze = selectedImage || 'olivier';
+    const payloadToSend = selectedBase64 || selectedImage || 'olivier';
+    const previewImage = selectedImage || 'olivier';
 
-    const result = await identifyPlantPhoto(imageToAnalyze);
+    const result = await identifyPlantPhoto(payloadToSend);
     router.push({
       pathname: '/result',
       params: {
-        image: imageToAnalyze,
+        image: previewImage,
         speciesData: JSON.stringify(result)
       }
     });
@@ -116,7 +134,6 @@ export default function ScannerScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Top Overlay Controls */}
       <View style={styles.topBar}>
         <TouchableOpacity
           onPress={() => router.back()}
@@ -136,8 +153,6 @@ export default function ScannerScreen() {
           />
         </TouchableOpacity>
       </View>
-
-      {/* Viewfinder / Preview Frame */}
       <View style={styles.cameraViewport}>
         {selectedImage ? (
           <Image
@@ -145,17 +160,16 @@ export default function ScannerScreen() {
               selectedImage === 'arganier'
                 ? PLANT_IMAGES.arganier
                 : selectedImage === 'palmier_dattier'
-                ? PLANT_IMAGES.palmier_dattier
-                : selectedImage === 'olivier'
-                ? PLANT_IMAGES.olivier
-                : { uri: selectedImage }
+                  ? PLANT_IMAGES.palmier_dattier
+                  : selectedImage === 'olivier'
+                    ? PLANT_IMAGES.olivier
+                    : { uri: selectedImage }
             }
             style={styles.previewImage}
             resizeMode="cover"
           />
         ) : (
           <View style={styles.mockFeed}>
-            {/* Background botanical foliage preview */}
             <Image
               source={PLANT_IMAGES.olivier}
               style={StyleSheet.absoluteFill}
@@ -164,8 +178,6 @@ export default function ScannerScreen() {
             <View style={styles.overlayTint} />
           </View>
         )}
-
-        {/* Viewfinder Target Brackets */}
         <View style={styles.targetFrame}>
           <View style={[styles.corner, styles.topLeft]} />
           <View style={[styles.corner, styles.topRight]} />
@@ -174,12 +186,10 @@ export default function ScannerScreen() {
           <Text style={styles.frameInstruction}>POSITION PLANT IN FRAME</Text>
         </View>
       </View>
-
-      {/* Specimen Quick Selector */}
       <View style={styles.specimenPickerRow}>
         <TouchableOpacity
           style={[styles.specimenChip, selectedImage === 'arganier' && styles.specimenChipActive]}
-          onPress={() => setSelectedImage('arganier')}
+          onPress={() => selectSpecimen('arganier')}
         >
           <Text style={[styles.specimenChipText, selectedImage === 'arganier' && styles.specimenChipTextActive]}>
             🌿 Arganier
@@ -187,7 +197,7 @@ export default function ScannerScreen() {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.specimenChip, selectedImage === 'palmier_dattier' && styles.specimenChipActive]}
-          onPress={() => setSelectedImage('palmier_dattier')}
+          onPress={() => selectSpecimen('palmier_dattier')}
         >
           <Text style={[styles.specimenChipText, selectedImage === 'palmier_dattier' && styles.specimenChipTextActive]}>
             🌴 Palmier
@@ -195,22 +205,18 @@ export default function ScannerScreen() {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.specimenChip, selectedImage === 'olivier' && styles.specimenChipActive]}
-          onPress={() => setSelectedImage('olivier')}
+          onPress={() => selectSpecimen('olivier')}
         >
           <Text style={[styles.specimenChipText, selectedImage === 'olivier' && styles.specimenChipTextActive]}>
             🫒 Olivier
           </Text>
         </TouchableOpacity>
       </View>
-
-      {/* Mode Switcher */}
       <View style={styles.modeRow}>
         <Text style={styles.modeText}>PHOTO</Text>
         <Text style={[styles.modeText, styles.modeActive]}>SCAN</Text>
         <Text style={styles.modeText}>CARE</Text>
       </View>
-
-      {/* Bottom Shutter & Gallery Controls */}
       <View style={styles.bottomBar}>
         <TouchableOpacity
           onPress={pickFromGallery}
@@ -219,8 +225,6 @@ export default function ScannerScreen() {
           <Ionicons name="images-outline" size={24} color="#FFFFFF" />
           <Text style={styles.controlLabel}>Gallery</Text>
         </TouchableOpacity>
-
-        {/* Center Shutter Button */}
         <TouchableOpacity
           activeOpacity={0.85}
           onPress={selectedImage ? handleIdentify : takePhoto}

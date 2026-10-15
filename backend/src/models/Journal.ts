@@ -12,7 +12,7 @@ const Journal = sequelize.define('Journal', {
     allowNull: false
   },
   action: {
-    type: DataTypes.STRING, // e.g. 'watered', 'fertilized', 'pruned', 'repotted', 'noted'
+    type: DataTypes.STRING,
     allowNull: false
   },
   photo_url: {
@@ -24,7 +24,7 @@ const Journal = sequelize.define('Journal', {
     allowNull: true
   },
   weather: {
-    type: DataTypes.STRING, // e.g. 'Sunny, 24°C'
+    type: DataTypes.STRING,
     allowNull: true
   }
 }, {

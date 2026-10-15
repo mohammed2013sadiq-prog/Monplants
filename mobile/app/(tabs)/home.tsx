@@ -33,7 +33,6 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Top Header */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.headerLeft}
@@ -82,7 +81,6 @@ export default function HomeScreen() {
           />
         }
       >
-        {/* Welcome Greeting Banner */}
         <View style={styles.greetingCard}>
           <View style={styles.greetingTextCol}>
             <Text style={styles.greetingSub}>
@@ -112,7 +110,7 @@ export default function HomeScreen() {
             onPress={() => router.push('/(tabs)/search')}
           >
             <Ionicons name="search-outline" size={22} color={Colors.primary} />
-            <Text style={styles.actionBtnSearchText}>Search Flora</Text>
+            <Text style={styles.actionBtnSearchText}>Search MonPlants </Text>
           </TouchableOpacity>
         </View>
 

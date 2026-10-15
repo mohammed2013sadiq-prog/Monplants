@@ -69,7 +69,6 @@ export default function ProfileScreen() {
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* Header Profile Section */}
       <View style={styles.profileHeader}>
         <View style={styles.avatarContainer}>
           {user?.avatar ? (
@@ -90,7 +89,6 @@ export default function ProfileScreen() {
         <Text style={styles.userName}>{user?.full_name || 'Botanical Explorer'}</Text>
         <Text style={styles.userEmail}>{user?.email || 'moplants.user@example.com'}</Text>
 
-        {/* Garden Statistics Card */}
         <View style={styles.statsCard}>
           <View style={styles.statItem}>
             <Text style={styles.statNumber}>{myPlants.length || 3}</Text>
@@ -109,7 +107,6 @@ export default function ProfileScreen() {
         </View>
       </View>
 
-      {/* Navigation Menu Options */}
       <View style={styles.menuSection}>
         <Text style={styles.menuSectionTitle}>Botanical Tools</Text>
 
@@ -131,7 +128,7 @@ export default function ProfileScreen() {
           <View style={[styles.menuIconCircle, { backgroundColor: '#E0F2FE' }]}>
             <Ionicons name="map" size={20} color="#0284C7" />
           </View>
-          <Text style={styles.menuItemText}>Flora Map & Habitats</Text>
+          <Text style={styles.menuItemText}>MonPlants  Map & Habitats</Text>
           <Ionicons name="chevron-forward" size={18} color={Colors.textMuted} />
         </TouchableOpacity>
 
@@ -158,7 +155,6 @@ export default function ProfileScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Account Settings Section */}
       <View style={styles.menuSection}>
         <Text style={styles.menuSectionTitle}>Preferences</Text>
 
@@ -185,7 +181,6 @@ export default function ProfileScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Logout Action */}
       <View style={styles.logoutWrapper}>
         <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
           <Ionicons name="log-out-outline" size={20} color={Colors.error} />

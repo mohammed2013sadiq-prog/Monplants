@@ -33,12 +33,11 @@ export default function MapScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Ionicons name="arrow-back" size={22} color={Colors.textPrimary} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Flora Habitats</Text>
+        <Text style={styles.headerTitle}>MonPlants  Habitats</Text>
         <View style={{ width: 40 }} />
       </View>
 
@@ -52,7 +51,7 @@ export default function MapScreen() {
             resizeMode="cover"
           />
           <View style={styles.mapOverlay}>
-            <Text style={styles.mapOverlayTitle}>Moroccan Native Flora</Text>
+            <Text style={styles.mapOverlayTitle}>Moroccan Native MonPlants </Text>
             <Text style={styles.mapOverlaySub}>Geographical distribution & climate zones</Text>
           </View>
         </View>

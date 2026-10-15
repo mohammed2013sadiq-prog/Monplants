@@ -26,13 +26,7 @@ export default function LoginScreen() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  const fillDemoAccount = () => {
-    setEmail('demo@moplants.app');
-    setPassword('password123');
-    setEmailError('');
-    setPasswordError('');
-    clearError();
-  };
+
 
   const handleLogin = async () => {
     clearError();
@@ -100,21 +94,7 @@ export default function LoginScreen() {
           <Text style={styles.title}>MoPlants</Text>
           <Text style={styles.subtitle}>Welcome back to your indoor garden.</Text>
 
-          {/* Database Connection Badge */}
-          <View style={styles.dbBadge}>
-            <View style={styles.dbDot} />
-            <Text style={styles.dbText}>PostgreSQL Database Connected</Text>
-          </View>
 
-          {/* Quick Demo Credentials Autofill */}
-          <TouchableOpacity
-            style={styles.demoFillBtn}
-            onPress={fillDemoAccount}
-            activeOpacity={0.8}
-          >
-            <Ionicons name="flash-outline" size={16} color={Colors.primary} />
-            <Text style={styles.demoFillText}>Quick Fill: Demo Account (demo@moplants.app)</Text>
-          </TouchableOpacity>
 
           {/* Error Banner */}
           {error ? (
@@ -271,49 +251,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginBottom: 14
   },
-  dbBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    backgroundColor: '#ECFDF5',
-    borderColor: '#A7F3D0',
-    borderWidth: 1,
-    paddingVertical: 4,
-    paddingHorizontal: 12,
-    borderRadius: 16,
-    marginBottom: 14,
-    gap: 6
-  },
-  dbDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#10B981'
-  },
-  dbText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#047857'
-  },
-  demoFillBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#F3FAF5',
-    borderWidth: 1,
-    borderColor: '#D1E7D8',
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 12,
-    marginBottom: 16,
-    gap: 6
-  },
-  demoFillText: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: Colors.primary
-  },
+
   errorContainer: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -66,7 +66,7 @@ const getUserPlants = async (userId) => {
     });
     if (plants && plants.length > 0) return plants;
   } catch (err) {
-    // Database connection fallback
+
   }
   return DEFAULT_USER_PLANTS;
 };
@@ -92,7 +92,7 @@ const getUserPlantById = async (id, userId) => {
   });
 
   if (!plant) {
-    const error = new Error('Plant not found in your collection.');
+    const error: any = new Error('Plant not found in your collection.');
     error.statusCode = 404;
     throw error;
   }
@@ -100,10 +100,9 @@ const getUserPlantById = async (id, userId) => {
 };
 
 const createUserPlant = async (userId, { species_id, nickname, image_url }) => {
-  // Check species
   const species = await Species.findByPk(species_id);
   if (!species) {
-    const error = new Error('Species not found.');
+    const error: any = new Error('Species not found.');
     error.statusCode = 404;
     throw error;
   }
@@ -115,7 +114,6 @@ const createUserPlant = async (userId, { species_id, nickname, image_url }) => {
     image_url: image_url || species.image_url
   });
 
-  // Auto-schedule an initial watering reminder
   const nextWatering = new Date();
   nextWatering.setDate(nextWatering.getDate() + 7);
 

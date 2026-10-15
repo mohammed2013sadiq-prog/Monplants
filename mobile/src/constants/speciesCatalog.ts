@@ -96,7 +96,7 @@ export const CATALOG_SPECIES: Species[] = [
 export function findSpeciesById(id: number | string): Species {
   const numId = typeof id === 'string' ? parseInt(id, 10) : id;
   const found = CATALOG_SPECIES.find((s) => s.id === numId);
-  return found || CATALOG_SPECIES[0]; // defaults to Olivier
+  return found || CATALOG_SPECIES[0];
 }
 
 export function findSpeciesByName(name: string): Species | undefined {

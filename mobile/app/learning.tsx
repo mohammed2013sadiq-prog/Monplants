@@ -21,7 +21,7 @@ const ARTICLES = [
   },
   {
     id: '3',
-    category: 'Mediterranean Flora',
+    category: 'Mediterranean MonPlants ',
     title: 'How to Nurture Olive Trees and Cacti Indoors',
     readTime: '6 min read',
     icon: 'leaf-outline'
@@ -40,7 +40,6 @@ export default function LearningScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Ionicons name="arrow-back" size={22} color={Colors.textPrimary} />

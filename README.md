@@ -64,7 +64,7 @@ MoPlants is a mobile application that enables users to identify plant species â€
 
 - Identify plant species using AI image recognition.
 
-- Educate users about plant care and local Moroccan flora.
+- Educate users about plant care and local Moroccan MonPlants .
 
 - Provide reliable, verified care information.
 

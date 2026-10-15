@@ -12,7 +12,7 @@ const Reminder = sequelize.define('Reminder', {
     allowNull: false
   },
   type: {
-    type: DataTypes.STRING, // e.g., 'watering', 'misting', 'fertilizing', 'pruning'
+    type: DataTypes.STRING,
     allowNull: false,
     defaultValue: 'watering'
   },
@@ -26,7 +26,7 @@ const Reminder = sequelize.define('Reminder', {
     allowNull: false
   },
   status: {
-    type: DataTypes.STRING, // 'pending', 'completed', 'skipped'
+    type: DataTypes.STRING,
     allowNull: false,
     defaultValue: 'pending'
   }

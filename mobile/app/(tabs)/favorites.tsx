@@ -16,7 +16,6 @@ export default function FavoritesScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Favorites</Text>
         <Text style={styles.headerSub}>

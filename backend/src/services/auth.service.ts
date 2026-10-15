@@ -13,7 +13,7 @@ const generateToken = (user) => {
 const register = async ({ full_name, email, password, avatar }) => {
   const existingUser = await User.findOne({ where: { email } });
   if (existingUser) {
-    const error = new Error('A user with this email already exists.');
+    const error: any = new Error('A user with this email already exists.');
     error.statusCode = 400;
     throw error;
   }
@@ -45,14 +45,14 @@ const register = async ({ full_name, email, password, avatar }) => {
 const login = async ({ email, password }) => {
   const user = await User.findOne({ where: { email } });
   if (!user) {
-    const error = new Error('Invalid email or password.');
+    const error: any = new Error('Invalid email or password.');
     error.statusCode = 401;
     throw error;
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    const error = new Error('Invalid email or password.');
+    const error: any = new Error('Invalid email or password.');
     error.statusCode = 401;
     throw error;
   }
@@ -75,7 +75,7 @@ const getProfile = async (userId) => {
     attributes: ['id', 'full_name', 'email', 'avatar', 'created_at']
   });
   if (!user) {
-    const error = new Error('User not found.');
+    const error: any = new Error('User not found.');
     error.statusCode = 404;
     throw error;
   }
@@ -85,7 +85,7 @@ const getProfile = async (userId) => {
 const updateProfile = async (userId, { full_name, avatar }) => {
   const user = await User.findByPk(userId);
   if (!user) {
-    const error = new Error('User not found.');
+    const error: any = new Error('User not found.');
     error.statusCode = 404;
     throw error;
   }

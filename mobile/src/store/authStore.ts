@@ -85,7 +85,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       if (token && cachedUser) {
         set({ user: cachedUser, token, isLoading: false });
 
-        // Verify with backend
         try {
           const res = await api.get('/auth/profile');
           if (res.data?.data) {
@@ -93,7 +92,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
             await storage.saveUser(res.data.data);
           }
         } catch {
-          // Keep cached user if offline
         }
       } else {
         set({ user: null, token: null, isLoading: false });
@@ -110,7 +108,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       set({ user: updatedUser });
       await storage.saveUser(updatedUser);
 
-      // Sync avatar to database
       try {
         await api.put('/auth/profile', { avatar: avatar || null });
       } catch (err) {

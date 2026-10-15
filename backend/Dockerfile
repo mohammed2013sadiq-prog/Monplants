@@ -17,5 +17,5 @@ COPY . .
 # Expose API port
 EXPOSE 3000
 
-# Start server
-CMD ["node", "src/server.js"]
+# Start server with tsx for TypeScript support
+CMD ["npx", "tsx", "src/server.ts"]
